@@ -16,7 +16,7 @@ public class Inventory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
-	Character character; //TODO: collegamento 
+	Creature character; //TODO: collegamento 
 	List<Item> item; //TODO: collegamento 
 	
 	int quantity;
@@ -28,10 +28,10 @@ public class Inventory {
 		this.id = id;
 	}
 
-	public Character getCharacter() {
+	public Creature getCharacter() {
 		return character;
 	}
-	public void setCharacter(Character character) {
+	public void setCharacter(Creature character) {
 		this.character = character;
 	}
 
