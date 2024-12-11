@@ -1,9 +1,13 @@
 package com.rpgbattle.com.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity	
@@ -22,12 +26,22 @@ public class Creature {
 	int wisdom;
 	int intelligence;
 	int exp;
-	Race race; // TODO: collegamento
-	CharacterClass characterClass; // TODO: collegamento la parola class ovviamente non piace a java
+	
+	@ManyToOne
+	@JoinColumn(name="race_id", nullable=false)
+	Race race; 
+	
+	@ManyToOne
+	@JoinColumn(name="character_class_id", nullable=false)
+	CharacterClass characterClass;
+	
 	int level;
 	int money;
 	int lifePoints;
-	Inventory inventory;// TODO: collegamento
+	
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "inventory_id", referencedColumnName = "id")
+	Inventory inventory;
 	
 	public int getId() {
 		return id;
