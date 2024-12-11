@@ -1,9 +1,15 @@
 package com.rpgbattle.com.model;
 
+import java.util.Set;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Table;
 
 @Entity
@@ -14,6 +20,16 @@ public class CharacterClass {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	int id;
 	
+    @OneToMany(mappedBy="characterClass")
+    private Set<Creature> creatures;
+	
+    @ManyToMany
+    @JoinTable(
+      name = "item_character_class", 
+      joinColumns = @JoinColumn(name = "item_id"), 
+      inverseJoinColumns = @JoinColumn(name = "character_classes_id"))
+    Set<Item> items;
+    
 	String name;
 	// ho aggiunto le statistiche di classe base
 	int strength;

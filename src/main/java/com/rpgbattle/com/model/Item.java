@@ -2,10 +2,15 @@ package com.rpgbattle.com.model;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,9 +22,19 @@ public class Item {
 	int id;
 	String name;
 	String description;
-	String type;  //TODO: da rivedere questa parte insieme forse non serve
-	Inventory inventory;  //TODO: collegamento 
-	List<CharacterClass> characterClass; //TODO: collegamento 
+	String type; 
+	
+    @ManyToOne
+    @JoinColumn(name="inventory_id", nullable=false)
+	Inventory inventory;  
+    
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+    	      name = "item_character_class", 
+    	      joinColumns = @JoinColumn(name = "character_classes_id"), 
+    	      inverseJoinColumns = @JoinColumn(name = "item_id"))
+	List<CharacterClass> characterClass; 
+    
 	int strength;
 	int dexterity;
 	int constitution;
