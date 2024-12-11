@@ -16,7 +16,7 @@ import com.rpgbattle.com.service.CharacterClassService;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/classes")
-public class CharachterClassRestController {
+public class CharacterClassRestController {
 	
 	@Autowired
 	CharacterClassService cClassService;
