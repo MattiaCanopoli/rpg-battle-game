@@ -12,11 +12,11 @@ import com.rpgbattle.com.repository.CreatureRepo;
 public class CreatureService {
 	
 	@Autowired
-	CreatureRepo cRepo;
+	CreatureRepo creatureRepo;
 
 	
 	public List<Creature> getAllCreatures(){
-		List<Creature> creatures = cRepo.findAll();
+		List<Creature> creatures = creatureRepo.findAll();
 		return creatures;
 	}
 }

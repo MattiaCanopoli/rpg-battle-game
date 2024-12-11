@@ -19,13 +19,13 @@ import com.rpgbattle.com.service.CreatureService;
 public class CreatureRestController {
 	
 	@Autowired
-	CreatureService cService;
+	CreatureService creatureService;
 
 	
 	@GetMapping
 	public ResponseEntity<List<Creature>> index() {
 		
-		List<Creature> creatures = cService.getAllCreatures();
+		List<Creature> creatures = creatureService.getAllCreatures();
 		return new ResponseEntity<>(creatures, HttpStatus.OK); 
 	}
 }
