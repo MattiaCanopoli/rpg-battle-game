@@ -19,7 +19,7 @@ public class Inventory {
 	int id;
 
 	@OneToOne(mappedBy = "inventory")
-	Creature character;
+	Creature creature;
 
 	@OneToMany(mappedBy="inventory")
 	List<Item> item; 
@@ -34,12 +34,12 @@ public class Inventory {
 		this.id = id;
 	}
 
-	public Creature getCharacter() {
-		return character;
+	public Creature getCreature() {
+		return creature;
 	}
 
-	public void setCharacter(Creature character) {
-		this.character = character;
+	public void setCreature(Creature creature) {
+		this.creature = creature;
 	}
 
 	public int getQuantity() {
