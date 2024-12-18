@@ -1,0 +1,57 @@
+.background-image {
+    background-image: url(/img/background2.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+
+.battle-background {
+    background-image: url(/img/Forest-themed-dnd-maps2.png);
+    background-size: 100% 100%;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+}
+
+.character {
+    height: auto;
+    width: 30%;
+}
+
+.move-right {
+    animation: move-right 1 0.1s linear;
+}
+
+@keyframes move-right {
+
+    0% {
+        transform: translateX(0%)
+    }
+
+    50% {
+        transform: translateX(25%)
+    }
+
+    100% {
+        transform: translateX(0%)
+    }
+}
+
+.move-left {
+    animation: move-left 1 0.2s linear;
+}
+
+@keyframes move-left {
+
+    0% {
+        transform: translateX(0%)
+    }
+
+    50% {
+        transform: translateX(-50%)
+    }
+
+    100% {
+        transform: translateX(0%)
+    }
+}
