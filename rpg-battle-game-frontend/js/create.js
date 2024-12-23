@@ -5,7 +5,7 @@ import {
 
 
 const btn = document.getElementById("testBtn")
-
+const logArea = document.getElementById("log")
 
 let charRolls = []
 
@@ -14,6 +14,9 @@ btn.addEventListener("click", function () {
     for (let i = 0; i < 6; i++) {
         charRolls.push(rollChar())
     }
-    console.log(charRolls)
+    logArea.value += "hai rollato " + charRolls + "\n"
+    logArea.scrollTop = logArea.scrollHeight;
 })
+
+
 
