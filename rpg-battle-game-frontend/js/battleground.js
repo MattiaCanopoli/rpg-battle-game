@@ -6,7 +6,7 @@ trovare un modo per ordinare la tabella*/
 
 "use strict";
 
-import { rollDice, logToTextarea, sumRolls } from "./common.js";
+import { rollDice, logToTextarea, sumRolls, rollToHit } from "./common.js";
 
 // FUNCTIONS
 
@@ -46,31 +46,41 @@ function addRemoveClass(elementId, cssAnimation, timeout) {
   }, timeout);
 }
 
-function attack(
-  textarea,
-  monsterDef,
+/**evaluate if the attack has hit.
+ * return true if hitValue >= enemyDef.
+ * print message to log
+ */
+function hasHit(hitValue, enemyDef, textArea) {
+  let message;
+  if (hitValue >= enemyDef) {
+    message = `Colpito! (hit: ${hitValue})`;
+    logToTextarea(textArea, message);
+    return true;
+  } else {
+    message = `Mancato! (hit: ${hitValue})`;
+    logToTextarea(textArea, message);
+    return false;
+  }
+}
+/**TODO: cambiare logiche per critico/calcolo tiro per colpire */
+function dealDamage(
   diceNumber,
   diceValue,
-  hitModifier,
+  hitValue,
   critValue,
-  critMultiplier
+  critMultiplier,
+  textArea
 ) {
-  const hit = sumRolls(rollDice(1, 20)) + hitModifier;
   let message;
-  if (hit >= monsterDef) {
-    let damageRolls = rollDice(diceNumber, diceValue);
-    let damage = sumRolls(damageRolls);
-    if (hit >= critValue) {
-      damage = damage * critMultiplier;
-      message = `Critico!\n    hai colpito con ${hit}\n    il nemico ha subito ${damage} danni (rolls: ${damageRolls} x ${critMultiplier})`;
-    } else {
-      message = `hai colpito con ${hit}\n    il nemico ha subito ${damage} danni (rolls: ${damageRolls})`;
-    }
+  let damageRolls = rollDice(diceNumber, diceValue);
+  let damage = sumRolls(damageRolls);
+  if (hitValue >= critValue) {
+    damage = damage * critMultiplier;
+    message = `Critico! il nemico ha subito ${damage} danni (rolls: ${damageRolls} x ${critMultiplier})`;
   } else {
-    message = `hai mancato il colpo! (hit: ${hit})`;
+    message = `il nemico ha subito ${damage} danni (rolls: ${damageRolls})`;
   }
-
-  logToTextarea(textarea, message);
+  logToTextarea(textArea, message);
 }
 
 const url = "http://localhost:8080/api/";
@@ -89,6 +99,9 @@ getData(url + "creatures", "player-table");
 
 animationBtn.addEventListener("click", function () {
   addRemoveClass("character", "move-left", 200);
-  //TODO: sostituire valori hardcoded con valori runtime
-  attack(logArea, 15, 2, 8, 0, 19, 2);
+  let hitValue = rollToHit(1, 20, 2);
+  let hit = hasHit(hitValue, 15, logArea);
+  if (hit) {
+    dealDamage(2, 8, hitValue, 19, 2, logArea);
+  }
 });
