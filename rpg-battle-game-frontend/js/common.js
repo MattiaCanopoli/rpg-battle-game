@@ -6,7 +6,12 @@ export function rollDice(times, value) {
         let roll = Math.ceil(Math.random() * value)
         rolls.push(roll)
     }
-    return rolls
+
+    let sum = 0;
+    for (let i = 0; i < rolls.length; i++) {
+        sum += rolls[i];
+    }
+    return sum
 }
 
 export function rollChar() {
@@ -29,4 +34,5 @@ export function rollChar() {
 
 export function logToTextarea(textarea, message) {
     textarea.value += message + "\n";
+    textarea.scrollTop = textarea.scrollHeight
 }
