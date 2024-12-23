@@ -32,3 +32,8 @@ build/
 
 ### VS Code ###
 .vscode/
+.gitattributes
+.mvn/wrapper/maven-wrapper.properties
+target/classes/META-INF/MANIFEST.MF
+target/classes/META-INF/maven/com.rpg-battle/rpg-battle-game/pom.properties
+.gitignore
