@@ -1,9 +1,9 @@
 'use strict'
 
-export function rollD20(times) {
+export function rollDice(times, value) {
     let rolls = [];
     for (let i = 0; i < times; i++) {
-        let roll = Math.ceil(Math.random() * 20)
+        let roll = Math.ceil(Math.random() * value)
         rolls.push(roll)
     }
     return rolls
@@ -25,4 +25,8 @@ export function rollChar() {
         sum += rolls[i];
     }
     return sum;
+}
+
+export function logToTextarea(textarea, message) {
+    textarea.value += message + "\n";
 }
