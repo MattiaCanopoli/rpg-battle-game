@@ -40,7 +40,7 @@ function addRemoveClass(elementId, cssAnimation, timeout) {
   const element = document.getElementById(elementId)
   element.classList.add(cssAnimation)
   setTimeout(function () {
-    btn.classList.remove(cssAnimation)
+    element.classList.remove(cssAnimation)
   }, timeout)
 }
 
