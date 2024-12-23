@@ -6,6 +6,11 @@ trovare un modo per ordinare la tabella*/
 
 'use strict'
 
+import {
+  rollDice,
+  logToTextarea
+} from "./common.js"
+
 // FUNCTIONS
 
 /*adds a row with two cells to a table*/
@@ -44,13 +49,35 @@ function addRemoveClass(elementId, cssAnimation, timeout) {
   }, timeout)
 }
 
+function attack(textarea, monsterDef, diceNumber, diceValue, hitModifier, critValue, critMultiplier) {
+  const hit = rollDice(1, 20) + hitModifier;
+  let message;
+  if (hit >= monsterDef) {
+    let damage = rollDice(diceNumber, diceValue)
+    if (hit >= critValue) {
+      damage = damage * critMultiplier;
+      message = `Critico!\n    hai colpito con ${hit}\n    il nemico ha subito ${damage} danni`
+    } else {
+      message = `hai colpito con ${hit}\n    il nemico ha subito ${damage} danni`
+    }
+  } else {
+    message = `hai mancato il colpo!`
+  }
+
+  logToTextarea(textarea, message)
+}
+
 const url = "http://localhost:8080/api/"
 const charKeys = ['race.name', 'characterClass.name', 'lifePoints', 'level', 'money']
 const animationBtn = document.getElementById("btn")
+const logArea = document.getElementById("log")
 
 getData(url + "creatures", "monster-table")
 getData(url + "creatures", "player-table")
 
 animationBtn.addEventListener("click", function () {
   addRemoveClass("character", 'move-left', 200)
+  //TODO: sostituire valori hardcoded con valori runtime
+  attack(logArea, 15, 2, 8, 0, 19, 2)
+
 })
