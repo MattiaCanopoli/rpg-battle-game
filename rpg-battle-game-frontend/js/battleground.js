@@ -6,7 +6,7 @@ trovare un modo per ordinare la tabella*/
 
 "use strict";
 
-import { rollDice, logToTextarea, sumRolls, rollToHit } from "./common.js";
+import { rollDice, logToTextarea, sumRolls } from "./common.js";
 
 // FUNCTIONS
 
@@ -93,15 +93,17 @@ const charKeys = [
 ];
 const animationBtn = document.getElementById("btn");
 const logArea = document.getElementById("log");
+const playerHitModifier = 2;
 
 getData(url + "creatures", "monster-table");
 getData(url + "creatures", "player-table");
 
 animationBtn.addEventListener("click", function () {
   addRemoveClass("character", "move-left", 200);
-  let hitValue = rollToHit(1, 20, 2);
-  let hit = hasHit(hitValue, 15, logArea);
+  let natHitValue = sumRolls(rollDice(1, 20));
+  let totalHitValue = natHitValue + playerHitModifier;
+  let hit = hasHit(totalHitValue, 15, logArea);
   if (hit) {
-    dealDamage(2, 8, hitValue, 19, 2, logArea);
+    dealDamage(2, 8, natHitValue, 19, 2, logArea);
   }
 });
