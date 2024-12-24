@@ -16,10 +16,6 @@ export function sumRolls(rollsArray) {
   }
   return sum;
 }
-export function rollToHit(times, value, hitModifier) {
-  const hitValue = sumRolls(rollDice(times, value)) + hitModifier;
-  return hitValue;
-}
 
 export function rollChar() {
   let rolls = [];
